@@ -17,7 +17,9 @@ class User {
    * Удаляет информацию об авторизованном
    * пользователе из локального хранилища.
    * */
-  static unsetCurrent() {}
+  static unsetCurrent() {
+    localStorage.removeItem("user")
+  }
 
   /**
    * Возвращает текущего авторизованного пользователя
@@ -35,7 +37,13 @@ class User {
    * Получает информацию о текущем
    * авторизованном пользователе.
    * */
-  static fetch(callback) {}
+  static fetch(callback) {
+    createRequest({
+      url: this.URL + '/current',
+      method: "GET",
+      callback: callback
+    })
+  }
 
   /**
    * Производит попытку авторизации.
