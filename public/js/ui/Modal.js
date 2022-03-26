@@ -11,8 +11,13 @@ class Modal {
    * Если переданный элемент не существует,
    * необходимо выкинуть ошибку.
    * */
-  constructor(element){
+  constructor(element) {
+    if(element == undefined){
+      throw new Error("Элемент не может быть пустым")
+    }
 
+    this.element = element;
+    this.registerEvents()
   }
 
   /**
@@ -20,28 +25,20 @@ class Modal {
    * должен закрыть текущее окно
    * (с помощью метода Modal.onClose)
    * */
-  registerEvents() {
-
-  }
+  registerEvents() {}
 
   /**
    * Срабатывает после нажатия на элементы, закрывающие окно.
    * Закрывает текущее окно (Modal.close())
    * */
-  onClose(e) {
-
-  }
+  onClose(e) {}
   /**
    * Открывает окно: устанавливает CSS-свойство display
    * со значением «block»
    * */
-  open() {
-
-  }
+  open() {}
   /**
    * Закрывает окно: удаляет CSS-свойство display
    * */
-  close(){
-
-  }
+  close() {}
 }
