@@ -12,12 +12,12 @@ class Modal {
    * необходимо выкинуть ошибку.
    * */
   constructor(element) {
-    if(element == undefined){
-      throw new Error("Элемент не может быть пустым")
+    if (element == undefined) {
+      throw new Error("Элемент не может быть пустым");
     }
 
     this.element = element;
-    this.registerEvents()
+    this.registerEvents();
   }
 
   /**
@@ -25,20 +25,34 @@ class Modal {
    * должен закрыть текущее окно
    * (с помощью метода Modal.onClose)
    * */
-  registerEvents() {}
+  registerEvents() {
+    Array.from(this.element.querySelectorAll("[data-dismiss]")).map(
+      (element) => {
+        element.onclick = () => {
+          this.onClose();
+        };
+      }
+    );
+  }
 
   /**
    * Срабатывает после нажатия на элементы, закрывающие окно.
    * Закрывает текущее окно (Modal.close())
    * */
-  onClose(e) {}
+  onClose(e) {
+    this.close()
+  }
   /**
    * Открывает окно: устанавливает CSS-свойство display
    * со значением «block»
    * */
-  open() {}
+  open() {
+    this.element.style.display = "block";
+  }
   /**
    * Закрывает окно: удаляет CSS-свойство display
    * */
-  close() {}
+  close() {
+    this.element.style.display = "none";
+  }
 }
