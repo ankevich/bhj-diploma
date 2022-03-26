@@ -17,15 +17,18 @@ const createRequest = (options = {}) => {
   });
 
   const email = options.data ? options.data.email : "";
+  const name = options.data ? options.data.name : "";
   const password = options.data ? options.data.password : "";
+
 
   if (options.method == "GET") {
 
-    request.open("GET", `${options.url}?mail=${email}&password=${password}`);
+    request.open("GET", `${options.url}?mail=${email}&password=${password}&name=${name}`);
     request.send();
   } else {
     let formData = new FormData();
-    formData.append("mail", email);
+    formData.append("email", email);
+    formData.append("name", name)
     formData.append("password", password);
 
     request.open(options.method, options.url);
