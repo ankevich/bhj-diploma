@@ -13,7 +13,11 @@ class AsyncForm {
    * через registerEvents()
    * */
   constructor(element) {
-
+    if (element == undefined) {
+      throw new Error("Элемент не может быть пустым");
+    }
+    this.element = element;
+    this.registerEvents();
   }
 
   /**
@@ -21,7 +25,10 @@ class AsyncForm {
    * вызывает метод submit()
    * */
   registerEvents() {
-
+    this.element.addEventListener("submit", (event) => {
+      event.preventDefault();
+      this.submit();
+    });
   }
 
   /**
@@ -32,18 +39,26 @@ class AsyncForm {
    * }
    * */
   getData() {
+    let formData = new FormData(this.element);
+    let entries = formData.entries();
+    let obj = {};
 
+    for (let item of entries) {
+      const key = item[0];
+      const value = item[1];
+      obj[key] = value;
+    }
+
+    return obj;
   }
 
-  onSubmit(options){
-
-  }
+  onSubmit(options) {}
 
   /**
    * Вызывает метод onSubmit и передаёт туда
    * данные, полученные из метода getData()
    * */
   submit() {
-
+    console.log("submit");
   }
 }
