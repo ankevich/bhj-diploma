@@ -52,13 +52,15 @@ class AsyncForm {
     return obj;
   }
 
-  onSubmit(options) {}
+  onSubmit(options) {
+  
+  }
 
   /**
    * Вызывает метод onSubmit и передаёт туда
    * данные, полученные из метода getData()
    * */
   submit() {
-    console.log("submit");
+    this.onSubmit(this.getData())
   }
 }
