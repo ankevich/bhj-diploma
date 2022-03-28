@@ -11,7 +11,19 @@ class CreateTransactionForm extends AsyncForm {
     super(element)
   }
 
-  /**
+  registerEvents() {
+    let incomeButton = document.querySelector(".create-income-button")
+    let expenseButton = document.querySelector(".create-expense-button")
+
+    incomeButton.onclick = () => {
+      App.getModal("newIncome").open()
+    }
+
+    expenseButton.onclick = () => {
+      App.getModal("newExpense").open()
+    }
+  }
+    /**
    * Получает список счетов с помощью Account.list
    * Обновляет в форме всплывающего окна выпадающий список
    * */
