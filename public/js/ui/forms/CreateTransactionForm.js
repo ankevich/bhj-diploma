@@ -12,18 +12,6 @@ class CreateTransactionForm extends AsyncForm {
     this.renderAccountsList()
   }
 
-  registerEvents() {
-    let incomeButton = document.querySelector(".create-income-button")
-    let expenseButton = document.querySelector(".create-expense-button")
-
-    incomeButton.onclick = () => {
-      App.getModal("newIncome").open()
-    }
-
-    expenseButton.onclick = () => {
-      App.getModal("newExpense").open()
-    }
-  }
     /**
    * Получает список счетов с помощью Account.list
    * Обновляет в форме всплывающего окна выпадающий список
@@ -31,11 +19,12 @@ class CreateTransactionForm extends AsyncForm {
   renderAccountsList() {
     Account.list(null, (err, response) => {
       if(response && response.data) {
-        console.log(response.data)
-        let select = document.querySelector(".accounts-select")
-        select.innerHTML = ""
-        response.data.forEach(account => {
-          select.innerHTML += `<option value="${account.id}">${account.name}</option>`
+        let selects = Array.from(document.querySelectorAll(".accounts-select"))
+        selects.forEach(select => {
+          select.innerHTML = ""
+          response.data.forEach(account => {
+            select.innerHTML += `<option value="${account.id}">${account.name}</option>`
+          })
         })
       }
     })
@@ -48,6 +37,14 @@ class CreateTransactionForm extends AsyncForm {
    * в котором находится форма
    * */
   onSubmit(data) {
-
+    console.log('transaction submit', data)
+    Transaction.create(data, (err, response) => {
+      if (response) {
+        App.update()
+        this.element.reset()
+      }
+      App.getModal("newIncome").close()
+      App.getModal("newExpense").close()
+    });
   }
 }
