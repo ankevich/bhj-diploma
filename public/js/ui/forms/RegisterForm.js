@@ -11,7 +11,7 @@ class RegisterForm extends AsyncForm {
    * */
   onSubmit(data) {
     User.register(data, (err, response) => {
-      if (response !== undefined) {
+      if (response) {
         App.setState("user-logged");
         this.element.reset()
       }

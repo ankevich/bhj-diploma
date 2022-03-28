@@ -12,7 +12,7 @@ class UserWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor(element) {
-    if (element == undefined) {
+    if (!element) {
       throw new Error("Элемент не может быть пустым");
     }
     this.element = element;
