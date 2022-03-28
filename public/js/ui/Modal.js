@@ -26,7 +26,7 @@ class Modal {
    * (с помощью метода Modal.onClose)
    * */
   registerEvents() {
-    Array.from(this.element.querySelectorAll("[data-dismiss]")).map(
+    Array.from(this.element.querySelectorAll("[data-dismiss]")).forEach(
       (element) => {
         element.onclick = () => {
           this.onClose();
