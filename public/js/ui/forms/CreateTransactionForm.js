@@ -9,6 +9,7 @@ class CreateTransactionForm extends AsyncForm {
    * */
   constructor(element) {
     super(element)
+    this.renderAccountsList()
   }
 
   registerEvents() {
@@ -28,7 +29,16 @@ class CreateTransactionForm extends AsyncForm {
    * Обновляет в форме всплывающего окна выпадающий список
    * */
   renderAccountsList() {
-
+    Account.list(null, (err, response) => {
+      if(response && response.data) {
+        console.log(response.data)
+        let select = document.querySelector(".accounts-select")
+        select.innerHTML = ""
+        response.data.forEach(account => {
+          select.innerHTML += `<option value="${account.id}">${account.name}</option>`
+        })
+      }
+    })
   }
 
   /**
